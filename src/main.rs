@@ -11,13 +11,13 @@ fn main() {
     // println!("{:?}", args)
 
     let cli_args = Config::new(&args).unwrap_or_else(|err| {
-        println!("Problem parsing the arguments: {}", err);
-        process::exit(-1);
+        eprintln!("Problem parsing the arguments: {}", err);
+        process::exit(1);
     });
     println!("Searching for {} in {}", cli_args.query, cli_args.filename);
 
     if let Err(e) = grep_cli_tool::run(cli_args) {
-        println!("Application Error: {}", e);
-        process::exit(-1);
+        eprintln!("Application Error: {}", e);
+        process::exit(1);
     }
 }
