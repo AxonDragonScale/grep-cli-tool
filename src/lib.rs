@@ -19,7 +19,10 @@ impl Config {
         let filename = args[2].clone();
 
         // if env var is present, is_err will return false, if its not var will give an error so is_err returns a true
-        let case_sensitive = std::env::var("CASE_INSENSITIVE").is_err();
+        let mut case_sensitive = true;
+        if args.len() == 4 && args[3] == "CASE_INSENSITIVE" {
+            case_sensitive = false;
+        }
 
         Ok(Config {
             query,
